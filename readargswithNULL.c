@@ -1,3 +1,16 @@
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <ctype.h>
+#define MAX_SUB_COMMANDS 5
+#define MAX_ARGS 10
+
+struct SubCommand
+{
+ char *line;
+ char *argv[MAX_ARGS];
+};
+
 struct Command
 {
     struct SubCommand sub_commands[MAX_SUB_COMMANDS];
@@ -110,4 +123,26 @@ int get_args(char *in, char **argv, int max_args)
   }
       // Return number of arguments
       return argc;
+}
+
+void print_args(char **argv)
+{
+        int i=0;
+    //    printing the arguments
+        while(argv[i]!=NULL)
+        {
+                printf("arg[%d] = '%s'\n",i,argv[i]);
+                i=i+1;
+        }
+}
+
+void printCommand(struct Command *command)
+{
+  int i=0;
+  for(i=0;i<co.num_sub_commands;i++)
+  {
+        printf("command %d\n",i+1);
+        print_args(command->sub_commands[i].argv);
+        printf("\n");
+  }
 }
