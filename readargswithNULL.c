@@ -88,3 +88,26 @@ void readRedirectsAndBackground(struct Command *command)
       }
   }
 }
+int get_args(char *in, char **argv, int max_args)
+{
+  // Initialize number of arguments
+  int argc = 0;
+  // Extract arguments
+  while (1)
+  {
+      // Get a token, and set 'in' to NULL for next time
+      char *token = strtok(in, " ");
+      in = NULL;
+      // Done if no more tokens
+      if (!token)
+      break;
+      // One more token
+      argv[argc] = strdup(token);
+      argc++;
+      // Check if maximum number of tokens was reached
+      if (argc >= max_args)
+      break;
+  }
+      // Return number of arguments
+      return argc;
+}
